@@ -1,0 +1,12 @@
+*
+!*/
+!*.c
+!*.h
+!*.py
+!*.sh
+!*.csv
+!*.txt
+!.gitignore
+!README
+!Makefile
+.idea
