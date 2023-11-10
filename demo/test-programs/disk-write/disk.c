@@ -3,24 +3,31 @@
 
 #define ITERATIONS 100000
 
+
 int main(void) {
     char* file_name= "test.txt";
 
-    for (int i = 0; i < ITERATIONS; i++) {
-        // Open file for writing
-        FILE *f = fopen(file_name, "a");
-        if (f == NULL) {
-            printf("Error opening file!\n");
-            return 1;
-        }
-        // Write some stuff
-        if (i % 10 == 0) {
-            fprintf(f, "\n");
-        }
-        fprintf(f, "%d ", i);
-        // Close the file
-        fclose(f);
+    FILE* f = fopen(file_name, "w+");
+    if (f == NULL) {
+        printf("Error opening file!\n");
+        return 1;
     }
+
+    int c = 0;
+    fpos_t pos;
+    fgetpos(f, &pos);
+    fputc(c, f);
+    fflush(f);
+
+    for (int i = 0; i < ITERATIONS; i++) {
+        fsetpos(f, &pos);
+        c = fgetc(f);
+        c = (c + 1) % 128;
+        fgetpos(f, &pos);
+        fputc(c, f);
+        fflush(f);
+    }
+    fclose(f);
 
     if (remove(file_name) == 0) {
         return 0;
