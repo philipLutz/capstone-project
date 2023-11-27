@@ -5,9 +5,9 @@ COMMANDS = (
     # "perf stat -e cache-references,cache-misses,cycles,instructions -x \; ./empty-loop/loop",
     # "sudo perf stat -e cache-references,cache-misses,cycles:uk,instructions:uk,'block:*' ./empty-loop/loop",
     # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,cycles:uk,instructions:uk ./empty-loop/loop",
-    "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./disk-write/disk",
+    # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./disk-write/disk",
     # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,cycles:uk,instructions:uk ./digits-pi/pi",
-    "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./fibonacci/fibonacci",
+    # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./fibonacci/fibonacci",
     "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./add/add",
 )
 
