@@ -9,6 +9,7 @@ COMMANDS = (
     # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,cycles:uk,instructions:uk ./digits-pi/pi",
     # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./fibonacci/fibonacci",
     "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./add/add",
+    "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./copy-file/copy",
 )
 
 def get_current_setting():
