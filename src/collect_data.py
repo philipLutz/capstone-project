@@ -5,17 +5,8 @@ import paramiko
 
 
 COMMANDS = [
-    # "perf stat -e cache-references,cache-misses,cycles,instructions -x \; ./empty-loop/loop",
-    # "sudo perf stat -e cache-references,cache-misses,cycles:uk,instructions:uk,'block:*' ./empty-loop/loop",
-    # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,cycles:uk,instructions:uk ./empty-loop/loop",
-    # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./disk-write/disk",
-    # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,cycles:uk,instructions:uk ./digits-pi/pi",
-    # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./fibonacci/fibonacci",
-    # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./add/add 100000",
-    # "./add/add 100000",
-    # "sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk ./copy-file/copy",
     {'name': "add_100000", 'command': "./add/add 100000", 'process-name': "add"},
-    # {"name": "copy_infinite", "command": "./copy-file/copy", "process-name": "copy"}
+    {"name": "copy_1000", "command": "./copy-file/copy 1000", "process-name": "copy"},
 ]
 
 def get_current_setting():
@@ -94,7 +85,6 @@ def collect_cpudist(command: dict):
         print("Executing cpudist-bpfcc on:\n" + command['name'])
         ssh_client_program.exec_command(command['command'])
 
-        # result = ""
         shell = ssh_client_cpudist.invoke_shell()
 
         shell.send(f"sudo cpudist-bpfcc -O -p $(pgrep -nx {command['process-name']})\n")

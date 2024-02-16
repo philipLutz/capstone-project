@@ -1,9 +1,14 @@
+/*  Copy characters between text files
+    Pathological example of reading and writing to disk
+    Program has to wait for write to complete on disk
+*/
+
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
 #include <stdio.h>
-
-#define ITERATIONS 1000
+#include <stdlib.h>
+#include <stdint.h>
 
 int cp(const char* to, const char* from) {
     int fd_to, fd_from;
@@ -16,7 +21,7 @@ int cp(const char* to, const char* from) {
         return -1;
     }
 
-    fd_to = open(to, O_WRONLY | O_CREAT | O_EXCL | O_DSYNC, 0700);
+    fd_to = open(to, O_WRONLY | O_CREAT | O_SYNC, 0700);
     if (fd_to < 0) {
         goto out_error;
     }
@@ -59,14 +64,26 @@ int cp(const char* to, const char* from) {
         return -1;
 }
 
-int main(void) {
-    for (int i = 0; i < ITERATIONS; i++) {
-        // "matrix.txt" must be in the directory that this program is called from
-        if (cp("test.txt", "matrix.txt") == 0) {
-            if (remove("test.txt") < 0) {
-                printf("Failed to remove test file\n");
+int main(int argc, char* argv[]) {
+    // "matrix.txt" must be in the directory that this program is called from
+    if (argc == 2) {
+        uint32_t num = (uint32_t) atoi(argv[1]);
+        if (num > 0 && num < UINT32_MAX) {
+            for (uint32_t i = 0; i < num; i++) {
+                if (cp("copy_test.txt", "matrix.txt") == 0) {
+                    if (remove("copy_test.txt" ) < 0) {
+                        printf("Failed to remove test file\n");
+                        return 1;
+                    }
+                }
             }
+        } else {
+            printf("Error: need positive argument less than %d\n", UINT32_MAX);
+            return 1;
         }
+    } else {
+        printf("Error: need one argument for number of iterations\n");
+        return 1;
     }
 
     return 0;
