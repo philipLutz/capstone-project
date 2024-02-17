@@ -7,6 +7,8 @@ import paramiko
 COMMANDS = [
     {'name': "add_100000", 'command': "./add/add 100000", 'process-name': "add"},
     {"name": "copy_1000", "command": "./copy-file/copy 1000", "process-name": "copy"},
+    {"name": "fib_naive_45", "command": "./fibonacci-naive/fibonacci 45", "process-name": "fibonacci"},
+    {"name": "fib_mem_100000000", "command": "./fibonacci-mem/fibonacci 100000000", "process-name": "fibonacci"},
 ]
 
 def get_current_setting():
