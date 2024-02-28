@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <math.h>
 
 int is_prime(uint32_t num)
 {
@@ -16,8 +15,7 @@ int is_prime(uint32_t num)
         return 1;
     }
 
-    uint32_t stop = (uint32_t) floor(sqrt(num));
-    for (uint32_t i = 2; i <= stop; i++) {
+    for (uint32_t i = 2; i * i <= num; i++) {
         if (num % i == 0) {
             return 0;
         }
