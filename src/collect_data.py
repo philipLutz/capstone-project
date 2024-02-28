@@ -16,6 +16,7 @@ COMMANDS = [
     {"name": "fib_naive_45", "command": "./fibonacci-naive/fibonacci 45", "process-name": "fibonacci"},
     {"name": "fib_mem_100000000", "command": "./fibonacci-mem/fibonacci 100000000", "process-name": "fibonacci"},
     {"name": "disk_write_1000000", "command": "./disk-write/disk 1000000", "process-name": "disk"},
+    {"name": "prime_naive_20000000", "command": "./prime-naive/prime 20000000", "process-name": "prime"},
 ]
 
 # List of all columns for CSV file
