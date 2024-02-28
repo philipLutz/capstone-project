@@ -1,5 +1,7 @@
 """
-Collection Program Performance Data
+Collection Script for Program Performance Data
+Assumes Raspberry Pi has test programs already compiled and is connected on local network
+Outputs a CSV file with the on-CPU and off-CPU measurements of each program
 """
 
 import csv
@@ -9,15 +11,64 @@ import paramiko
 
 # List of all programs that will be run and measured
 COMMANDS = [
-    # {'name': "add_100000", 'command': "./add/add 100000", 'process-name': "add"},
+    {'name': "add_100000", 'command': "./add/add 100000", 'process-name': "add"},
     {"name": "copy_1000", "command": "./copy-file/copy 1000", "process-name": "copy"},
-    # {"name": "fib_naive_45", "command": "./fibonacci-naive/fibonacci 45", "process-name": "fibonacci"},
-    # {"name": "fib_mem_100000000", "command": "./fibonacci-mem/fibonacci 100000000", "process-name": "fibonacci"},
-    # {"name": "disk_write_1000000", "command": "./disk-write/disk 1000000", "process-name": "disk"},
+    {"name": "fib_naive_45", "command": "./fibonacci-naive/fibonacci 45", "process-name": "fibonacci"},
+    {"name": "fib_mem_100000000", "command": "./fibonacci-mem/fibonacci 100000000", "process-name": "fibonacci"},
+    {"name": "disk_write_1000000", "command": "./disk-write/disk 1000000", "process-name": "disk"},
 ]
+
+# List of all columns for CSV file
+FIELDNAMES = [
+    "program",
+    "cache-references",
+    "cache-misses",
+    "mem_access",
+    "context-switches",
+    "cycles",
+    "instructions",
+    "elapsed",
+    "user",
+    "sys",
+    "0-1",
+    "2-3",
+    "4-7",
+    "8-15",
+    "16-31",
+    "32-63",
+    "64-127",
+    "128-255",
+    "256-511",
+    "512-1023",
+    "1024-2047",
+    "2048-4095",
+    "4096-8191",
+    "8192-16383",
+    "16384-32767",
+    "32768-65535",
+    "65536-131071",
+]
+
+# SSH credentials
+HOSTNAME = ""
+USERNAME = ""
+PASSWORD = ""
+with open("ssh.txt", "r") as credentials:
+    creds = []
+    for line in credentials:
+        creds.append((line.partition("=")[2]).strip())
+    HOSTNAME, USERNAME, PASSWORD = creds
+
 
 def format_perf_stat(raw: [str]) -> dict:
     """
+    Formats raw string output from perf stat to be used for csv.DictWriter
+
+    Args:
+        raw [str]: list of strings which are each line of the perf stat output
+
+    Returns:
+        dict: performance counter measurements and associated values
     """
     measurements = [
         "cache-references",
@@ -50,8 +101,14 @@ def format_perf_stat(raw: [str]) -> dict:
 
 def format_cpudist(raw: [str]) -> dict:
     """
-    """
+    Formats raw string output from cpudist-bpfcc to be used for csv.DictWriter
 
+    Args:
+        raw [str]: list of strings which are the lines of the captured shell output
+
+    Returns:
+        dict: off-CPU times, key is length of time in microseconds, value is count of occurrence 
+    """
     results = {}
     raw_split = raw.splitlines()
     found = False
@@ -61,25 +118,34 @@ def format_cpudist(raw: [str]) -> dict:
             if not line.startswith("usecs"):
                 stripped_line = line.strip("|*")
                 k, v = stripped_line.split(":")
-                print(f"key = {k}, value = {v}")
+                results[k.replace(">", "")] = v
         if raw_split[i].startswith("^C"):
             found = True
-        
+
+    for k in list(results.keys()):
+        if k not in FIELDNAMES:
+            del results[k]
+
+    for f in FIELDNAMES[10:]:
+        if f not in list(results.keys()):
+            results[f] = 0
 
     return results
 
 
 def get_current_setting():
     """
+    Print the current CPU governor settings on the Raspberry Pi
+
+    To change CPU governor policy, go to /etc/default/cpu_governor, uncomment the variable, and add the correct value
+    "sudo" must be used to edit file and then the system needs to be rebooted
+    "performance" statically runs the CPU at the highest frequency and for a default RPI4, that is 1.5GHz
+    "powersave" statically runs the CPU at the lowest frequency and for a default RPI4, that is 0.6GHz
     """
-    # To change CPU governor policy, go to /etc/default/cpu_governor, uncomment the variable, and add the correct value
-    # "sudo" must be used to edit file and then the system needs to be rebooted
-    # "performance" statically runs the CPU at the highest frequency and for a default RPI4, that is 1.5GHz
-    # "powersave" statically runs the CPU at the lowest frequency and for a default RPI4, that is 0.6GHz
     try:
         ssh_client = paramiko.SSHClient()
         ssh_client.load_system_host_keys()
-        ssh_client.connect(hostname="10.0.0.165", username="philiplutz", password="raspberry")
+        ssh_client.connect(hostname=HOSTNAME, username=USERNAME, password=PASSWORD)
         stdin_raw, stdout_raw, stderr_raw = ssh_client.exec_command(
             "cat /sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
         )
@@ -106,11 +172,19 @@ def get_current_setting():
 
 def collect_perf_stat(command: dict) -> dict:
     """
+    Connect over SSH and run perf stat on a test program
+    Test program must terminate
+
+    Args:
+        command (dict): name, command, and process name of program to measure
+
+    Returns:
+        dict: performance counter measurements and associated values
     """
     try:
         ssh_client = paramiko.SSHClient()
         ssh_client.load_system_host_keys()
-        ssh_client.connect(hostname="10.0.0.165", username="philiplutz", password="raspberry")
+        ssh_client.connect(hostname=HOSTNAME, username=USERNAME, password=PASSWORD)
         print("Executing perf stat on:\n" + command['name'])
         stdin_raw, stdout_raw, stderr_raw = ssh_client.exec_command(
             f"sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk {command['command']}"
@@ -137,15 +211,23 @@ def collect_perf_stat(command: dict) -> dict:
 
 def collect_cpudist(command: dict) -> dict:
     """
+    Connect over SSH with two connections, measure test program with cpudist-bpfcc
+    Test program must run for minimum of 30 seconds, process will be killed
+
+    Args:
+        command (dict): name, command, and process name of program to measure
+
+    Returns:
+        dict: off-CPU times, key is length of time in microseconds, value is count of occurrence 
     """
     try:
         ssh_client_program = paramiko.SSHClient()
         ssh_client_program.load_system_host_keys()
-        ssh_client_program.connect(hostname="10.0.0.165", username="philiplutz", password="raspberry")
+        ssh_client_program.connect(hostname=HOSTNAME, username=USERNAME, password=PASSWORD)
 
         ssh_client_cpudist = paramiko.SSHClient()
         ssh_client_cpudist.load_system_host_keys()
-        ssh_client_cpudist.connect(hostname="10.0.0.165", username="philiplutz", password="raspberry")
+        ssh_client_cpudist.connect(hostname=HOSTNAME, username=USERNAME, password=PASSWORD)
 
         print("Executing cpudist-bpfcc on:\n" + command['name'])
         # start program that will be measured
@@ -183,7 +265,13 @@ def collect_cpudist(command: dict) -> dict:
 # main
 get_current_setting()
 
-for command in COMMANDS:
-    # collect_perf_stat(command)
-    collect_cpudist(command)
+with open('program_results.csv', 'w', newline='') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+    writer.writeheader()
+
+    for command in COMMANDS:
+        results = {"program": command["name"]}
+        results.update(collect_perf_stat(command))
+        results.update(collect_cpudist(command))
+        writer.writerow(results)
 
