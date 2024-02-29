@@ -62,7 +62,7 @@ with open("ssh.txt", "r") as credentials:
     HOSTNAME, USERNAME, PASSWORD = creds
 
 
-def format_perf_stat(raw: [str]) -> dict:
+def format_perf_stat(raw: list[str]) -> dict:
     """
     Formats raw string output from perf stat to be used for csv.DictWriter
 
@@ -101,7 +101,7 @@ def format_perf_stat(raw: [str]) -> dict:
     return results
 
 
-def format_cpudist(raw: [str]) -> dict:
+def format_cpudist(raw: list[str]) -> dict:
     """
     Formats raw string output from cpudist-bpfcc to be used for csv.DictWriter
 
@@ -264,6 +264,14 @@ def collect_cpudist(command: dict) -> dict:
         return {}
 
 
+def collect_results(command: dict) -> dict:
+    """
+    """
+    results = {"program": command["name"]}
+    results.update(collect_perf_stat(command))
+    results.update(collect_cpudist(command))
+    return results
+
 # main
 get_current_setting()
 
@@ -272,8 +280,9 @@ with open('program_results.csv', 'w', newline='') as csvfile:
     writer.writeheader()
 
     for command in COMMANDS:
-        results = {"program": command["name"]}
-        results.update(collect_perf_stat(command))
-        results.update(collect_cpudist(command))
-        writer.writerow(results)
+        # Multiple executions of each test program
+        for i in range(2):
+            results = collect_results(command)
+            results["program"] += f"_{i+1}"
+            writer.writerow(results)
 
