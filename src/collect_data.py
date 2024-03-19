@@ -23,20 +23,13 @@ COMMANDS = [
 # List of all columns for CSV file
 FIELDNAMES = [
     "program",
-    "cache-references",
-    "cache-misses",
-    "mem_access",
+    "cache-misses-percent",
     "context-switches",
-    "cycles",
-    "instructions",
+    "instructions-per-cycle",
     "elapsed",
     "user",
     "sys",
-    "0-1",
-    "2-3",
-    "4-7",
-    "8-15",
-    "16-31",
+    "0-31",
     "32-63",
     "64-127",
     "128-255",
@@ -75,7 +68,6 @@ def format_perf_stat(raw: list[str]) -> dict:
     measurements = [
         "cache-references",
         "cache-misses",
-        "mem_access",
         "context-switches",
         "cycles",
         "instructions",
@@ -98,6 +90,14 @@ def format_perf_stat(raw: list[str]) -> dict:
         if len(line_result) == 4 and line_result[3].startswith("elapsed"):
             results['elapsed'] = float(line_result[0].replace(",", ""))
 
+    results['cache-misses-percent'] = results['cache-misses'] / results['cache-references']
+    del results['cache-misses']
+    del results['cache-references']
+
+    results['instructions-per-cycle'] = results['instructions'] / results['cycles']
+    del results['instructions']
+    del results['cycles']
+
     return results
 
 
@@ -111,6 +111,26 @@ def format_cpudist(raw: list[str]) -> dict:
     Returns:
         dict: off-CPU times, key is length of time in microseconds, value is count of occurrence 
     """
+    measurements = [
+        "0-1",
+        "2-3",
+        "4-7",
+        "8-15",
+        "16-31",
+        "32-63",
+        "64-127",
+        "128-255",
+        "256-511",
+        "512-1023",
+        "1024-2047",
+        "2048-4095",
+        "4096-8191",
+        "8192-16383",
+        "16384-32767",
+        "32768-65535",
+        "65536-131071",
+    ]
+
     results = {}
     raw_split = raw.splitlines()
     found = False
@@ -125,12 +145,22 @@ def format_cpudist(raw: list[str]) -> dict:
             found = True
 
     for k in list(results.keys()):
-        if k not in FIELDNAMES:
+        if k not in measurements:
             del results[k]
 
-    for f in FIELDNAMES[10:]:
+    for f in measurements:
         if f not in list(results.keys()):
             results[f] = 0
+
+    for k in list(results.keys()):
+        results[k] = int(results[k])
+
+    results['0-31'] = results['0-1'] + results['2-3'] + results['4-7'] + results['8-15'] + results['16-31']
+    del results['0-1']
+    del results['2-3']
+    del results['4-7']
+    del results['8-15']
+    del results['16-31']
 
     return results
 
@@ -189,7 +219,7 @@ def collect_perf_stat(command: dict) -> dict:
         ssh_client.connect(hostname=HOSTNAME, username=USERNAME, password=PASSWORD)
         print("Executing perf stat on:\n" + command['name'])
         stdin_raw, stdout_raw, stderr_raw = ssh_client.exec_command(
-            f"sudo perf stat -e cache-references:uk,cache-misses:uk,mem_access:uk,context-switches:uk,cycles:uk,instructions:uk {command['command']}"
+            f"sudo perf stat -e cache-references:uk,cache-misses:uk,context-switches:uk,cycles:uk,instructions:uk {command['command']}"
         )
 
         stderr = []
@@ -266,6 +296,13 @@ def collect_cpudist(command: dict) -> dict:
 
 def collect_results(command: dict) -> dict:
     """
+    Run perf stat and cpudist-bpfcc on target
+
+    Args:
+        command (dict): name, command, and process name of program to measure
+
+    Returns:
+        dict: performance measurements and associated values
     """
     results = {"program": command["name"]}
     results.update(collect_perf_stat(command))
