@@ -54,6 +54,9 @@ with open("ssh.txt", "r") as credentials:
         creds.append((line.partition("=")[2]).strip())
     HOSTNAME, USERNAME, PASSWORD = creds
 
+# Output CSV file name
+OUTPUT_FILENAME = "program_performance_results.csv"
+
 
 def format_perf_stat(raw: list[str]) -> dict:
     """
@@ -312,14 +315,49 @@ def collect_results(command: dict) -> dict:
 # main
 get_current_setting()
 
-with open('program_results.csv', 'w', newline='') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
-    writer.writeheader()
+# Check if file contains the header row, otherwise write it
+try:    
+    with open(OUTPUT_FILENAME, 'r+', newline='') as csvfile:
+        print("reading existing file")
+        reader = csv.reader(csvfile, delimiter=',')
+        for row in reader:
+            try:
+                if row[0] != "program":
+                    print("writing header on existing file")
+                    writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+                    writer.writeheader()
+                break
+            except(IndexError):
+                print("writing header on existing file")
+                writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+                writer.writeheader()
+        if reader.line_num == 0:
+            print("writing header on existing file")
+            writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+            writer.writeheader()
+except(FileNotFoundError):
+    with open(OUTPUT_FILENAME, 'w', newline='') as csvfile:
+        print("writing header in new file")
+        writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+        writer.writeheader()
 
-    for command in COMMANDS:
-        # Multiple executions of each test program
-        for i in range(2):
-            results = collect_results(command)
-            results["program"] += f"_{i+1}"
-            writer.writerow(results)
+# Check if program performance results have already been collected, otherwise run and append results
+for command in COMMANDS:
+    contains_program_result = False
+    with open(OUTPUT_FILENAME, newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        for row in reader:
+            if command['name'] in row[0]:
+                contains_program_result = True
+                break
 
+    if not contains_program_result:
+        with open(OUTPUT_FILENAME, 'a', newline='') as csvfile:
+            print(f"need to run {command['name']}")
+            # Multiple executions of each test program
+            for i in range(3):
+                results = collect_results(command)
+                results["program"] += f"_{i+1}"
+                writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+                writer.writerow(results)
+                
