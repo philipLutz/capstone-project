@@ -14,11 +14,17 @@ COMMANDS = [
     {'name': "add_100000", 'command': "./add/add 100000", 'process-name': "add"},
     {'name': "thread_add_30000", 'command': "./thread-add/add 30000", 'process-name': "add"},
     {"name": "copy_1000", "command": "./copy-file/copy 1000", "process-name": "copy"},
+    {"name": "thread_copy_150", "command": "./thread-copy-file/copy 150", "process-name": "copy"},
     {"name": "fib_naive_45", "command": "./fibonacci-naive/fibonacci 45", "process-name": "fibonacci"},
     {"name": "fib_mem_100000000", "command": "./fibonacci-mem/fibonacci 100000000", "process-name": "fibonacci"},
     {"name": "disk_write_1000000", "command": "./disk-write/disk 1000000", "process-name": "disk"},
+    # threaded disk write
     {"name": "prime_naive_20000000", "command": "./prime-naive/prime 20000000", "process-name": "prime"},
+    # threaded prime naive
     {"name": "prime_sieve_500000000", "command": "./prime-sieve/prime 500000000", "process-name": "prime"},
+    # scratch bubble sort
+    # scratch merge sort
+    # qsort
 ]
 
 # List of all columns for CSV file
