@@ -20,7 +20,7 @@ COMMANDS = [
     {"name": "disk_write_1000000", "command": "./disk-write/disk 1000000", "process-name": "disk"},
     {"name": "thread_disk_write_500000", "command": "./thread-disk-write/disk 500000", "process-name": "disk"},
     {"name": "prime_naive_20000000", "command": "./prime-naive/prime 20000000", "process-name": "prime"},
-    # threaded prime naive
+    {"name": "thread_prime_naive_40000000", "command": "./thread-prime-naive/prime 40000000", "process-name": "prime"},
     {"name": "prime_sieve_500000000", "command": "./prime-sieve/prime 500000000", "process-name": "prime"},
     # scratch bubble sort
     # scratch merge sort
