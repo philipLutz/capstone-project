@@ -23,14 +23,11 @@ COMMANDS = [
     {"name": "thread_prime_naive_40000000", "command": "./thread-prime-naive/prime 40000000", "process-name": "prime"},
     {"name": "prime_sieve_500000000", "command": "./prime-sieve/prime 500000000", "process-name": "prime"},
     {"name": "bubble_sort_worst_50000", "command": "./bubble-sort-worst/sort 50000", "process-name": "sort"},
-    # scratch bubble sort, sorted
-    # scratch bubble sort, /dev/urandom
+    {"name": "bubble_sort_random_50000", "command": "./bubble-sort-random/sort 50000", "process-name": "sort"},
     # scratch merge sort, worst case
-    # scratch merge sort, sorted
-    # scratch merge sort, /dev/urandom
+    # scratch merge sort, random
     # qsort, worst case
-    # qsort, sorted
-    # qsort, /dev/urandom
+    # qsort, random
 ]
 
 # List of all columns for CSV file
