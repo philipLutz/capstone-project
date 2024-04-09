@@ -24,10 +24,10 @@ COMMANDS = [
     {"name": "prime_sieve_500000000", "command": "./prime-sieve/prime 500000000", "process-name": "prime"},
     {"name": "bubble_sort_worst_50000", "command": "./bubble-sort-worst/sort 50000", "process-name": "sort"},
     {"name": "bubble_sort_random_50000", "command": "./bubble-sort-random/sort 50000", "process-name": "sort"},
+    {"name": "qsort_worst_100000000", "command": "./qsort-worst/sort 100000000", "process-name": "sort"},
+    # qsort, random
     # scratch merge sort, worst case
     # scratch merge sort, random
-    # qsort, worst case
-    # qsort, random
 ]
 
 # List of all columns for CSV file
