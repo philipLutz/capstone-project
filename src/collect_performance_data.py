@@ -25,7 +25,7 @@ COMMANDS = [
     {"name": "bubble_sort_worst_50000", "command": "./bubble-sort-worst/sort 50000", "process-name": "sort"},
     {"name": "bubble_sort_random_50000", "command": "./bubble-sort-random/sort 50000", "process-name": "sort"},
     {"name": "qsort_worst_100000000", "command": "./qsort-worst/sort 100000000", "process-name": "sort"},
-    # qsort, random
+    {"name": "qsort_random_30000000", "command": "./qsort-random/sort 30000000", "process-name": "sort"},
     # scratch merge sort, worst case
     # scratch merge sort, random
 ]
