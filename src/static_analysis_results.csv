@@ -2,6 +2,7 @@ program,total-operators,distinct-operators,total-operands,distinct-operands,func
 bubble_sort_worst,681,65,375,207,56,3,10,5,9,6,6,4,5,3,30
 thread_string_resize_small,1313,107,694,442,88,4,13,6,11,7,6,4,5,3,30
 fibonacci_naive,606,56,327,202,56,0,0,2,3,4,6,4,5,3,30
+multiply,622,61,340,206,54,2,7,3,5,4,6,4,5,3,30
 thread_prime_naive,1215,111,637,384,81,5,13,5,10,4,6,4,5,3,31
 prime_naive,646,59,344,204,55,2,3,4,6,4,6,4,5,3,31
 disk_write,649,61,369,212,67,1,3,2,4,4,10,5,8,3,35
