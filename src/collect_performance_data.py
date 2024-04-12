@@ -31,11 +31,11 @@ COMMANDS = [
     {'name': "multiply_1000000", 'command': "./multiply/multiply 1000000", 'process-name': "multiply"},
     {'name': "thread_multiply_500000", 'command': "./thread-multiply/multiply 500000", 'process-name': "multiply"},
     {'name': "random_1000000", 'command': "./get-random-numbers/random 1000000", 'process-name': "random"},
+    {'name': "thread_random_5000000", 'command': "./thread-get-random-numbers/random 5000000", 'process-name': "random"},
     # scratch merge sort, worst case
     # scratch merge sort, random
     # scratch counting sort, worst case
     # scratch counting sort, random
-    # read from /dev/urandom
 ]
 
 # List of all columns for CSV file
