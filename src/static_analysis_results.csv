@@ -1,5 +1,6 @@
 program,total-operators,distinct-operators,total-operands,distinct-operands,function-calls,loops,assignments,max-cyclomatic-complexity,sum-cyclomatic-complexity,dynamic-memory-calls,file-access,file-operation,file-position,file-error,input-output
 bubble_sort_worst,681,65,375,207,56,3,10,5,9,6,6,4,5,3,30
+thread_string_resize_small,1313,107,694,442,88,4,13,6,11,7,6,4,5,3,30
 fibonacci_naive,606,56,327,202,56,0,0,2,3,4,6,4,5,3,30
 thread_prime_naive,1215,111,637,384,81,5,13,5,10,4,6,4,5,3,31
 prime_naive,646,59,344,204,55,2,3,4,6,4,6,4,5,3,31

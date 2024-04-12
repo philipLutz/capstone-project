@@ -27,6 +27,7 @@ COMMANDS = [
     {"name": "qsort_worst_100000000", "command": "./qsort-worst/sort 100000000", "process-name": "sort"},
     {"name": "qsort_random_30000000", "command": "./qsort-random/sort 30000000", "process-name": "sort"},
     {"name": "string_resize_small_200000", "command": "./string-resize-small/string 200000", "process-name": "string"},
+    {"name": "thread_string_resize_small_100000", "command": "./thread-string-resize-small/string 100000", "process-name": "string"},
     # scratch merge sort, worst case
     # scratch merge sort, random
     # scratch counting sort, worst case
