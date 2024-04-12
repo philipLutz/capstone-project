@@ -29,6 +29,7 @@ COMMANDS = [
     {"name": "string_resize_small_200000", "command": "./string-resize-small/string 200000", "process-name": "string"},
     {"name": "thread_string_resize_small_100000", "command": "./thread-string-resize-small/string 100000", "process-name": "string"},
     {'name': "multiply_1000000", 'command': "./multiply/multiply 1000000", 'process-name': "multiply"},
+    {'name': "thread_multiply_500000", 'command': "./thread-multiply/multiply 500000", 'process-name': "multiply"},
     # scratch merge sort, worst case
     # scratch merge sort, random
     # scratch counting sort, worst case
