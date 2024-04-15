@@ -32,6 +32,7 @@ COMMANDS = [
     {'name': "thread_multiply_500000", 'command': "./thread-multiply/multiply 500000", 'process-name': "multiply"},
     {'name': "random_1000000", 'command': "./get-random-numbers/random 1000000", 'process-name': "random"},
     {'name': "thread_random_5000000", 'command': "./thread-get-random-numbers/random 5000000", 'process-name': "random"},
+    {'name': "collatz_12000000", 'command': "./collatz/collatz 12000000", "process-name": "collatz"},
     # scratch merge sort, worst case
     # scratch merge sort, random
     # scratch counting sort, worst case
