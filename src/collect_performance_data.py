@@ -35,6 +35,7 @@ COMMANDS = [
     {'name': "collatz", 'command': "./collatz/collatz 12000000", "process-name": "collatz"},
     {'name': "collatz_o1", 'command': "./collatz-o1/collatz 50000000", "process-name": "collatz"},
     {'name': "collatz_o2", 'command': "./collatz-o2/collatz 50000000", "process-name": "collatz"},
+    {'name': "collatz_o3", 'command': "./collatz-o3/collatz 20000000", "process-name": "collatz"},
     # scratch merge sort, worst case
     # scratch merge sort, random
     # scratch counting sort, worst case
