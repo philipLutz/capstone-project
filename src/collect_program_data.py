@@ -26,6 +26,7 @@ FIELDNAMES = [
     "file-position",
     "file-error",
     "input-output",
+    "optimization",
 ]
 
 # Mappings of Frama-c names to fieldnames for CSV file
@@ -176,6 +177,10 @@ with open('static_analysis_results.csv', 'w', newline='') as csvfile:
             if ".c" in file:
                 print(root)
                 results = {"program": root.split('/')[1].replace('-', '_')}
+                if "_o" in results['program'][-3:]:
+                    results['optimization'] = int(results['program'][-1])
+                else:
+                    results['optimization'] = 0
                 results.update(collect_static_metrics((root + "/" + file)))
                 writer.writerow(results)
 

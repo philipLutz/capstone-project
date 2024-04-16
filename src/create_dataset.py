@@ -68,7 +68,7 @@ with open(OUTPUT_X_FILE, 'w', newline='') as x_file:
         # remove program name
         del line_to_write[0]
         # remove file-error column
-        del line_to_write[-2]
+        del line_to_write[-3]
         writer.writerow(line_to_write)
 
 with open(OUTPUT_Y_FILE, 'w', newline='') as y_file:
