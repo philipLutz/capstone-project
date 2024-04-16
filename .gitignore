@@ -3,6 +3,7 @@
 !*.c
 !*.h
 !*.py
+!*ipynb
 !*.sh
 !*.csv
 !*.txt
