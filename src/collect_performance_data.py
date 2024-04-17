@@ -47,7 +47,13 @@ COMMANDS = [
     {"name": "prime_sieve_o2", "command": "./prime-sieve-o2/prime 600000000", "process-name": "prime"},
     {"name": "prime_sieve_o3", "command": "./prime-sieve-o3/prime 600000000", "process-name": "prime"},
     {"name": "bubble_sort_worst", "command": "./bubble-sort-worst/sort 50000", "process-name": "sort"},
+    {"name": "bubble_sort_worst_o1", "command": "./bubble-sort-worst-o1/sort 100000", "process-name": "sort"},
+    {"name": "bubble_sort_worst_o2", "command": "./bubble-sort-worst-o2/sort 100000", "process-name": "sort"},
+    {"name": "bubble_sort_worst_o3", "command": "./bubble-sort-worst-o3/sort 120000", "process-name": "sort"},
     {"name": "bubble_sort_random", "command": "./bubble-sort-random/sort 50000", "process-name": "sort"},
+    {"name": "bubble_sort_random_o1", "command": "./bubble-sort-random-o1/sort 80000", "process-name": "sort"},
+    {"name": "bubble_sort_random_o2", "command": "./bubble-sort-random-o2/sort 80000", "process-name": "sort"},
+    {"name": "bubble_sort_random_o3", "command": "./bubble-sort-random-o3/sort 80000", "process-name": "sort"},
     {"name": "qsort_worst", "command": "./qsort-worst/sort 100000000", "process-name": "sort"},
     {"name": "qsort_random", "command": "./qsort-random/sort 30000000", "process-name": "sort"},
     {"name": "string_resize_small", "command": "./string-resize-small/string 200000", "process-name": "string"},
@@ -60,8 +66,6 @@ COMMANDS = [
     {'name': "collatz_o1", 'command': "./collatz-o1/collatz 50000000", "process-name": "collatz"},
     {'name': "collatz_o2", 'command': "./collatz-o2/collatz 50000000", "process-name": "collatz"},
     {'name': "collatz_o3", 'command': "./collatz-o3/collatz 20000000", "process-name": "collatz"},
-    # scratch merge sort, worst case
-    # scratch merge sort, random
     # scratch counting sort, worst case
     # scratch counting sort, random
 ]

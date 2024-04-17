@@ -48,3 +48,9 @@ thread_prime_naive_o3,2068.807910828247
 prime_sieve_o1,92.50424231404243
 prime_sieve_o2,127.22210233864102
 prime_sieve_o3,447.2154959414849
+bubble_sort_worst_o1,0.11232859385328724
+bubble_sort_worst_o2,0.14536893420677124
+bubble_sort_worst_o3,0.5715638140856095
+bubble_sort_random_o1,0.6053874704070171
+bubble_sort_random_o2,1.6115385884256443
+bubble_sort_random_o3,2.5148565609818836
