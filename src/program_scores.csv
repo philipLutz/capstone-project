@@ -39,3 +39,9 @@ disk_write_o3,23.658377059106773
 thread_disk_write_o1,314.883794589886
 thread_disk_write_o2,318.753045348517
 thread_disk_write_o3,328.44265820587924
+prime_naive_o1,9.215298154709558
+prime_naive_o2,6.660035890314063
+prime_naive_o3,7.6400664136544
+thread_prime_naive_o1,2218.014100984116
+thread_prime_naive_o2,2171.3280280730232
+thread_prime_naive_o3,2068.807910828247
