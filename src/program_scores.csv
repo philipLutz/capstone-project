@@ -60,3 +60,5 @@ qsort_worst_o3,7.445286419478806
 qsort_random_o1,6.147810315387036
 qsort_random_o2,7.2957166006468555
 qsort_random_o3,1.5180091974694794
+string_resize_small_o1,0.09485956642601247
+thread_string_resize_small_o1,2.988410961207629
