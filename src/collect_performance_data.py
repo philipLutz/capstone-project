@@ -43,6 +43,9 @@ COMMANDS = [
     {"name": "thread_prime_naive_o2", "command": "./thread-prime-naive-o2/prime 40000000", "process-name": "prime"},
     {"name": "thread_prime_naive_o3", "command": "./thread-prime-naive-o3/prime 40000000", "process-name": "prime"},
     {"name": "prime_sieve", "command": "./prime-sieve/prime 500000000", "process-name": "prime"},
+    {"name": "prime_sieve_o1", "command": "./prime-sieve-o1/prime 600000000", "process-name": "prime"},
+    {"name": "prime_sieve_o2", "command": "./prime-sieve-o2/prime 600000000", "process-name": "prime"},
+    {"name": "prime_sieve_o3", "command": "./prime-sieve-o3/prime 600000000", "process-name": "prime"},
     {"name": "bubble_sort_worst", "command": "./bubble-sort-worst/sort 50000", "process-name": "sort"},
     {"name": "bubble_sort_random", "command": "./bubble-sort-random/sort 50000", "process-name": "sort"},
     {"name": "qsort_worst", "command": "./qsort-worst/sort 100000000", "process-name": "sort"},
@@ -315,8 +318,8 @@ def collect_cpudist(command: dict) -> dict:
         shell.send(f"sudo cpudist-bpfcc -O -p $(pgrep -nx {command['process-name']})\n")
 
         # cpudist-bpfcc takes a few seconds to start measuring the target process
-        # the target process should run for at least 30 seconds
-        sleep(25)
+        # the target process should run for at least 45 seconds
+        sleep(45)
         # send "Control-C" keyboard interrupt to stop cpudist-bpfcc execution
         shell.send('\x03')
         # wait a few seconds for the shell to write the output
