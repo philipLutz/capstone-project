@@ -4,11 +4,18 @@ Outputs a CSV file of the program name and the score value
 """
 
 import csv
+import math
+import sys
 
 
 PERFORMANCE_RESULTS_FILE = "program_performance_results.csv"
 OUTPUT_FILE = "program_scores.csv"
 RUNS_PER_PROGRAM = 3
+
+def order_of_magnitude(num):
+    if num == 0.0:
+        return 0
+    return math.floor(math.log(num, 10))
 
 def compute_score(run: dict) -> float:
     """
@@ -56,19 +63,26 @@ with open(PERFORMANCE_RESULTS_FILE, 'r', newline='') as results_file:
     current_score = 0.0
     for row in reader:
         if row['program'][:-2] != current_program:
-            score_results[current_program] = current_score / RUNS_PER_PROGRAM
+            real_score = current_score / RUNS_PER_PROGRAM
+            score_results[current_program] = order_of_magnitude(real_score)
+            # print("REAL: " + str(real_score))
+            # print("ORDER: " + str(order_of_magnitude(real_score)))
             current_program = row['program'][:-2]
             current_score = 0.0
         current_score += compute_score(row)
     # final program needs added
-    score_results[current_program] = current_score / RUNS_PER_PROGRAM
+    real_score = current_score / RUNS_PER_PROGRAM
+    score_results[current_program] = order_of_magnitude(real_score)
     # empty starting entry needs deleted
     del score_results[""]
+
+# Get the smallest order of magnitude so the first category is 1
+minimum_order_of_magnitude = min(score_results.values())
 
 with open(OUTPUT_FILE, 'w', newline='') as output_file:
     writer = csv.DictWriter(output_file, fieldnames=['program', 'score'])
     writer.writeheader()
     for k, v in score_results.items():
-        writer.writerow({'program': k, 'score': v})
+        writer.writerow({'program': k, 'score': (v + abs(minimum_order_of_magnitude) + 1)})
 
         
