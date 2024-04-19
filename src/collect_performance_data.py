@@ -74,8 +74,14 @@ COMMANDS = [
     {'name': "collatz_o1", 'command': "./collatz-o1/collatz 50000000", "process-name": "collatz"},
     {'name': "collatz_o2", 'command': "./collatz-o2/collatz 50000000", "process-name": "collatz"},
     {'name': "collatz_o3", 'command': "./collatz-o3/collatz 20000000", "process-name": "collatz"},
-    # scratch counting sort, worst case
-    # scratch counting sort, random
+    {"name": "counting_sort_worst", "command": "./counting-sort-worst/sort 20000000", "process-name": "sort"},
+    {"name": "counting_sort_worst_o1", "command": "./counting-sort-worst-o1/sort 50000000", "process-name": "sort"},
+    {"name": "counting_sort_worst_o2", "command": "./counting-sort-worst-o2/sort 50000000", "process-name": "sort"},
+    {"name": "counting_sort_worst_o3", "command": "./counting-sort-worst-o3/sort 50000000", "process-name": "sort"},
+    {"name": "counting_sort_random", "command": "./counting-sort-random/sort 40000000", "process-name": "sort"},
+    {"name": "counting_sort_random_o1", "command": "./counting-sort-random-o1/sort 50000000", "process-name": "sort"},
+    {"name": "counting_sort_random_o2", "command": "./counting-sort-random-o2/sort 50000000", "process-name": "sort"},
+    {"name": "counting_sort_random_o3", "command": "./counting-sort-random-o3/sort 50000000", "process-name": "sort"},
 ]
 
 # List of all columns for CSV file
@@ -330,8 +336,8 @@ def collect_cpudist(command: dict) -> dict:
         shell.send(f"sudo cpudist-bpfcc -O -p $(pgrep -nx {command['process-name']})\n")
 
         # cpudist-bpfcc takes a few seconds to start measuring the target process
-        # the target process should run for at least 45 seconds
-        sleep(45)
+        # the target process should run for at least 30 seconds
+        sleep(30)
         # send "Control-C" keyboard interrupt to stop cpudist-bpfcc execution
         shell.send('\x03')
         # wait a few seconds for the shell to write the output
