@@ -82,6 +82,11 @@ COMMANDS = [
     {"name": "counting_sort_random_o1", "command": "./counting-sort-random-o1/sort 50000000", "process-name": "sort"},
     {"name": "counting_sort_random_o2", "command": "./counting-sort-random-o2/sort 50000000", "process-name": "sort"},
     {"name": "counting_sort_random_o3", "command": "./counting-sort-random-o3/sort 50000000", "process-name": "sort"},
+    {'name': "matrix_multiply_stack", 'command': "./matrix-multiply-stack/matrix 1000", "process-name": "matrix"},
+    {'name': "matrix_multiply_stack_o1", 'command': "./matrix-multiply-stack-o1/matrix 2500", "process-name": "matrix"},
+    {'name': "matrix_multiply_stack_o2", 'command': "./matrix-multiply-stack-o2/matrix 8000", "process-name": "matrix"},
+    {'name': "matrix_multiply_stack_o3", 'command': "./matrix-multiply-stack-o3/matrix 9000", "process-name": "matrix"},
+    # matrix multiply dynamic
 ]
 
 # List of all columns for CSV file

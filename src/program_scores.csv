@@ -70,3 +70,7 @@ counting_sort_random,7
 counting_sort_random_o1,5
 counting_sort_random_o2,6
 counting_sort_random_o3,5
+matrix_multiply_stack,3
+matrix_multiply_stack_o1,5
+matrix_multiply_stack_o2,5
+matrix_multiply_stack_o3,3
