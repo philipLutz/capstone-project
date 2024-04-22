@@ -74,3 +74,7 @@ matrix_multiply_stack,3
 matrix_multiply_stack_o1,5
 matrix_multiply_stack_o2,5
 matrix_multiply_stack_o3,3
+matrix_multiply_heap,4
+matrix_multiply_heap_o1,5
+matrix_multiply_heap_o2,5
+matrix_multiply_heap_o3,5

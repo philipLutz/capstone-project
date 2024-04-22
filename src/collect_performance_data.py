@@ -86,7 +86,12 @@ COMMANDS = [
     {'name': "matrix_multiply_stack_o1", 'command': "./matrix-multiply-stack-o1/matrix 2500", "process-name": "matrix"},
     {'name': "matrix_multiply_stack_o2", 'command': "./matrix-multiply-stack-o2/matrix 8000", "process-name": "matrix"},
     {'name': "matrix_multiply_stack_o3", 'command': "./matrix-multiply-stack-o3/matrix 9000", "process-name": "matrix"},
-    # matrix multiply dynamic
+    {'name': "matrix_multiply_heap", 'command': "./matrix-multiply-heap/matrix 100 1000", "process-name": "matrix"},
+    {'name': "matrix_multiply_heap_o1", 'command': "./matrix-multiply-heap-o1/matrix 100 2000", "process-name": "matrix"},
+    {'name': "matrix_multiply_heap_o2", 'command': "./matrix-multiply-heap-o2/matrix 100 5000", "process-name": "matrix"},
+    {'name': "matrix_multiply_heap_o3", 'command': "./matrix-multiply-heap-o3/matrix 100 5000", "process-name": "matrix"},
+    # branches
+    # check time waiting
 ]
 
 # List of all columns for CSV file
