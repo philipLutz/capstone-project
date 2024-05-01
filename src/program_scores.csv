@@ -82,3 +82,7 @@ wait,2
 wait_o1,1
 wait_o2,1
 wait_o3,2
+prime_factorization,1
+prime_factorization_o1,5
+prime_factorization_o2,4
+prime_factorization_o3,3

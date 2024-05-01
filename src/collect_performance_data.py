@@ -94,6 +94,10 @@ COMMANDS = [
     {'name': "wait_o1", 'command': "./wait-o1/wait 35", 'process-name': "wait"},
     {'name': "wait_o2", 'command': "./wait-o2/wait 35", 'process-name': "wait"},
     {'name': "wait_o3", 'command': "./wait-o3/wait 35", 'process-name': "wait"},
+    {'name': "prime_factorization", 'command': "./prime-factorization/factorize 10000000", 'process-name': "factorize"},
+    {'name': "prime_factorization_o1", 'command': "./prime-factorization-o1/factorize 10000000", 'process-name': "factorize"},
+    {'name': "prime_factorization_o2", 'command': "./prime-factorization-o2/factorize 10000000", 'process-name': "factorize"},
+    {'name': "prime_factorization_o3", 'command': "./prime-factorization-o3/factorize 10000000", 'process-name': "factorize"},
     # branches
 ]
 
