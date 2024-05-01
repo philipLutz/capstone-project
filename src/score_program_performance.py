@@ -12,6 +12,16 @@ PERFORMANCE_RESULTS_FILE = "program_performance_results.csv"
 OUTPUT_FILE = "program_scores.csv"
 RUNS_PER_PROGRAM = 3
 
+SCORE_CLASS_MAPPING = {
+    0: 1,
+    1: 2,
+    2: 2,
+    3: 2,
+    4: 3,
+    5: 3,
+    6: 4,
+}
+
 def order_of_magnitude(num):
     if num == 0.0:
         return 0
@@ -83,6 +93,6 @@ with open(OUTPUT_FILE, 'w', newline='') as output_file:
     writer = csv.DictWriter(output_file, fieldnames=['program', 'score'])
     writer.writeheader()
     for k, v in score_results.items():
-        writer.writerow({'program': k, 'score': (v + abs(minimum_order_of_magnitude) + 1)})
+        writer.writerow({'program': k, 'score': SCORE_CLASS_MAPPING[(v + abs(minimum_order_of_magnitude))]})
 
         
