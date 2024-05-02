@@ -98,6 +98,10 @@ COMMANDS = [
     {'name': "prime_factorization_o1", 'command': "./prime-factorization-o1/factorize 10000000", 'process-name': "factorize"},
     {'name': "prime_factorization_o2", 'command': "./prime-factorization-o2/factorize 10000000", 'process-name': "factorize"},
     {'name': "prime_factorization_o3", 'command': "./prime-factorization-o3/factorize 10000000", 'process-name': "factorize"},
+    {'name': "thread_prime_factorization", 'command': "./thread-prime-factorization/factorize 25000000", 'process-name': "factorize"},
+    {'name': "thread_prime_factorization_o1", 'command': "./thread-prime-factorization-o1/factorize 25000000", 'process-name': "factorize"},
+    {'name': "thread_prime_factorization_o2", 'command': "./thread-prime-factorization-o2/factorize 25000000", 'process-name': "factorize"},
+    {'name': "thread_prime_factorization_o3", 'command': "./thread-prime-factorization-o3/factorize 25000000", 'process-name': "factorize"},
     # branches
 ]
 
