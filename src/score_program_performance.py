@@ -20,6 +20,7 @@ SCORE_CLASS_MAPPING = {
     4: 3,
     5: 3,
     6: 4,
+    7: 4,
 }
 
 def order_of_magnitude(num):

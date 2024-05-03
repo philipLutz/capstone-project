@@ -102,7 +102,14 @@ COMMANDS = [
     {'name': "thread_prime_factorization_o1", 'command': "./thread-prime-factorization-o1/factorize 25000000", 'process-name': "factorize"},
     {'name': "thread_prime_factorization_o2", 'command': "./thread-prime-factorization-o2/factorize 25000000", 'process-name': "factorize"},
     {'name': "thread_prime_factorization_o3", 'command': "./thread-prime-factorization-o3/factorize 25000000", 'process-name': "factorize"},
-    # branches
+    {'name': "binary_search_stack", 'command': "./binary-search-stack/search 20000000", 'process-name': "search"},
+    {'name': "binary_search_stack_o1", 'command': "./binary-search-stack-o1/search 20000000", 'process-name': "search"},
+    {'name': "binary_search_stack_o2", 'command': "./binary-search-stack-o2/search 20000000", 'process-name': "search"},
+    {'name': "binary_search_stack_o3", 'command': "./binary-search-stack-o3/search 20000000", 'process-name': "search"},
+    # thread binary seach stack
+    # binary search, make huge heap array, find a random number
+    # thread bianry search heap
+    # traverse linked list
 ]
 
 # List of all columns for CSV file
