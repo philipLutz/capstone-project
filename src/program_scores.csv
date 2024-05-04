@@ -102,3 +102,7 @@ thread_binary_search_stack,3
 thread_binary_search_stack_o1,4
 thread_binary_search_stack_o2,4
 thread_binary_search_stack_o3,4
+thread_binary_search_heap,4
+thread_binary_search_heap_o1,4
+thread_binary_search_heap_o2,4
+thread_binary_search_heap_o3,4

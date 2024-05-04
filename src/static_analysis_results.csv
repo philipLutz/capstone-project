@@ -1,4 +1,5 @@
 program,total-operators,distinct-operators,total-operands,distinct-operands,function-calls,loops,assignments,max-cyclomatic-complexity,sum-cyclomatic-complexity,dynamic-memory-calls,file-access,file-operation,file-position,file-error,input-output,optimization
+thread_binary_search_heap_o2,1264,115,676,399,92,5,13,6,11,6,6,4,5,3,31,2
 matrix_multiply_stack_o1,713,62,401,213,55,6,13,5,9,4,6,4,5,3,31,1
 bubble_sort_worst,681,65,375,207,56,3,10,5,9,6,6,4,5,3,30,0
 thread_string_resize_small,1313,107,694,442,88,4,13,6,11,7,6,4,5,3,30,0
@@ -6,9 +7,11 @@ prime_naive_o3,646,59,344,204,55,2,3,4,6,4,6,4,5,3,31,3
 counting_sort_random_o3,988,98,516,271,82,6,13,6,12,10,6,4,5,3,32,3
 binary_search_heap_o1,933,99,494,281,82,2,4,5,7,6,6,4,5,3,31,1
 prime_naive_o2,646,59,344,204,55,2,3,4,6,4,6,4,5,3,31,2
+thread_binary_search_heap_o3,1264,115,676,399,92,5,13,6,11,6,6,4,5,3,31,3
 wait,832,89,428,265,74,1,1,2,4,4,6,4,5,3,30,0
 fibonacci_naive_o1,606,56,327,202,56,0,0,2,3,4,6,4,5,3,30,1
 qsort_random_o1,848,93,435,266,75,1,2,3,4,6,6,4,5,3,30,1
+thread_binary_search_heap,1264,115,676,399,92,5,13,6,11,6,6,4,5,3,31,0
 counting_sort_random_o2,988,98,516,271,82,6,13,6,12,10,6,4,5,3,32,2
 thread_string_resize_small_o1,1313,107,694,442,88,4,13,6,11,7,6,4,5,3,30,1
 thread_get_random_numbers,1456,115,780,512,95,4,11,5,9,6,6,4,5,3,30,0
@@ -53,6 +56,7 @@ get_random_numbers,891,70,496,333,71,1,2,3,5,6,6,4,5,3,30,0
 binary_search_heap_o2,933,99,494,281,82,2,4,5,7,6,6,4,5,3,31,2
 qsort_random_o3,848,93,435,266,75,1,2,3,4,6,6,4,5,3,30,3
 fibonacci_naive_o3,606,56,327,202,56,0,0,2,3,4,6,4,5,3,30,3
+thread_binary_search_heap_o1,1264,115,676,399,92,5,13,6,11,6,6,4,5,3,31,1
 matrix_multiply_stack_o2,713,62,401,213,55,6,13,5,9,4,6,4,5,3,31,2
 copy_file,995,75,552,346,76,3,9,8,12,4,6,5,5,3,31,0
 fibonacci_naive_o2,606,56,327,202,56,0,0,2,3,4,6,4,5,3,30,2

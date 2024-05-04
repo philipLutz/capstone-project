@@ -114,7 +114,10 @@ COMMANDS = [
     {'name': "binary_search_heap_o1", 'command': "./binary-search-heap-o1/search 20000000", 'process-name': "search"},
     {'name': "binary_search_heap_o2", 'command': "./binary-search-heap-o2/search 20000000", 'process-name': "search"},
     {'name': "binary_search_heap_o3", 'command': "./binary-search-heap-o3/search 20000000", 'process-name': "search"},
-    # thread binary search heap
+    {'name': "thread_binary_search_heap", 'command': "./thread-binary-search-heap/search 4000000", 'process-name': "search"},
+    {'name': "thread_binary_search_heap_o1", 'command': "./thread-binary-search-heap-o1/search 4000000", 'process-name': "search"},
+    {'name': "thread_binary_search_heap_o2", 'command': "./thread-binary-search-heap-o2/search 4000000", 'process-name': "search"},
+    {'name': "thread_binary_search_heap_o3", 'command': "./thread-binary-search-heap-o3/search 4000000", 'process-name': "search"},
     # traverse linked list
 ]
 
