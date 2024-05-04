@@ -98,3 +98,7 @@ binary_search_heap,3
 binary_search_heap_o1,3
 binary_search_heap_o2,3
 binary_search_heap_o3,3
+thread_binary_search_stack,3
+thread_binary_search_stack_o1,4
+thread_binary_search_stack_o2,4
+thread_binary_search_stack_o3,4

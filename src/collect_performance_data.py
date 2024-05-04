@@ -106,7 +106,10 @@ COMMANDS = [
     {'name': "binary_search_stack_o1", 'command': "./binary-search-stack-o1/search 20000000", 'process-name': "search"},
     {'name': "binary_search_stack_o2", 'command': "./binary-search-stack-o2/search 20000000", 'process-name': "search"},
     {'name': "binary_search_stack_o3", 'command': "./binary-search-stack-o3/search 20000000", 'process-name': "search"},
-    # thread binary search stack
+    {'name': "thread_binary_search_stack", 'command': "./thread-binary-search-stack/search 4000000", 'process-name': "search"},
+    {'name': "thread_binary_search_stack_o1", 'command': "./thread-binary-search-stack-o1/search 4000000", 'process-name': "search"},
+    {'name': "thread_binary_search_stack_o2", 'command': "./thread-binary-search-stack-o2/search 4000000", 'process-name': "search"},
+    {'name': "thread_binary_search_stack_o3", 'command': "./thread-binary-search-stack-o3/search 4000000", 'process-name': "search"},
     {'name': "binary_search_heap", 'command': "./binary-search-heap/search 20000000", 'process-name': "search"},
     {'name': "binary_search_heap_o1", 'command': "./binary-search-heap-o1/search 20000000", 'process-name': "search"},
     {'name': "binary_search_heap_o2", 'command': "./binary-search-heap-o2/search 20000000", 'process-name': "search"},
