@@ -110,3 +110,7 @@ linked_list_search,2
 linked_list_search_o1,2
 linked_list_search_o2,2
 linked_list_search_o3,2
+thread_linked_list_search,3
+thread_linked_list_search_o1,3
+thread_linked_list_search_o2,3
+thread_linked_list_search_o3,3
