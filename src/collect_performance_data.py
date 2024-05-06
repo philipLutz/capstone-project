@@ -118,7 +118,10 @@ COMMANDS = [
     {'name': "thread_binary_search_heap_o1", 'command': "./thread-binary-search-heap-o1/search 4000000", 'process-name': "search"},
     {'name': "thread_binary_search_heap_o2", 'command': "./thread-binary-search-heap-o2/search 4000000", 'process-name': "search"},
     {'name': "thread_binary_search_heap_o3", 'command': "./thread-binary-search-heap-o3/search 4000000", 'process-name': "search"},
-    # traverse linked list
+    {'name': "linked_list_search", 'command': "./linked-list-search/search 20", 'process-name': "search"},
+    {'name': "linked_list_search_o1", 'command': "./linked-list-search-o1/search 30", 'process-name': "search"},
+    {'name': "linked_list_search_o2", 'command': "./linked-list-search-o2/search 30", 'process-name': "search"},
+    {'name': "linked_list_search_o3", 'command': "./linked-list-search-o3/search 30", 'process-name': "search"},
 ]
 
 # List of all columns for CSV file

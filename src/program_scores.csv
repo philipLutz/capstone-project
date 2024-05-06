@@ -106,3 +106,7 @@ thread_binary_search_heap,4
 thread_binary_search_heap_o1,4
 thread_binary_search_heap_o2,4
 thread_binary_search_heap_o3,4
+linked_list_search,2
+linked_list_search_o1,2
+linked_list_search_o2,2
+linked_list_search_o3,2
