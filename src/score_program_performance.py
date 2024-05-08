@@ -17,10 +17,10 @@ SCORE_CLASS_MAPPING = {
     1: 1,
     2: 2,
     3: 2,
-    4: 3,
+    4: 2,
     5: 3,
-    6: 4,
-    7: 4,
+    6: 3,
+    7: 3,
 }
 
 def order_of_magnitude(num):
