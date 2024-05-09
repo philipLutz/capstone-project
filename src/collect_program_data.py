@@ -167,20 +167,20 @@ def collect_static_metrics(program: str) -> dict:
     return metrics
 
 
-# main
-with open('static_analysis_results.csv', 'w', newline='') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
-    writer.writeheader()
+if __name__ == '__main__':
+    with open('static_analysis_results.csv', 'w', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+        writer.writeheader()
 
-    for root, dirs, files in os.walk("test-programs"):
-        for file in files:
-            if ".c" in file:
-                print(root)
-                results = {"program": root.split('/')[1].replace('-', '_')}
-                if "_o" in results['program'][-3:]:
-                    results['optimization'] = int(results['program'][-1])
-                else:
-                    results['optimization'] = 0
-                results.update(collect_static_metrics((root + "/" + file)))
-                writer.writerow(results)
+        for root, dirs, files in os.walk("test-programs"):
+            for file in files:
+                if ".c" in file:
+                    print(root)
+                    results = {"program": root.split('/')[1].replace('-', '_')}
+                    if "_o" in results['program'][-3:]:
+                        results['optimization'] = int(results['program'][-1])
+                    else:
+                        results['optimization'] = 0
+                    results.update(collect_static_metrics((root + "/" + file)))
+                    writer.writerow(results)
 

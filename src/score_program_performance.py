@@ -72,35 +72,35 @@ def compute_score(run: dict) -> float:
     return (float(run['cache-misses-percent']) / float(run['instructions-per-cycle'])) * (most_frequent_block_time + max_block_time)
 
 
-# main
-score_results = {}
+if __name__ == '__main__':
+    score_results = {}
 
-with open(PERFORMANCE_RESULTS_FILE, 'r', newline='') as results_file:
-    reader = csv.DictReader(results_file)
-    current_program = ""
-    current_score = 0.0
-    for row in reader:
-        if row['program'][:-2] != current_program:
-            real_score = current_score / RUNS_PER_PROGRAM
-            score_results[current_program] = order_of_magnitude(real_score)
-            # print("REAL: " + str(real_score))
-            # print("ORDER: " + str(order_of_magnitude(real_score)))
-            current_program = row['program'][:-2]
-            current_score = 0.0
-        current_score += compute_score(row)
-    # final program needs added
-    real_score = current_score / RUNS_PER_PROGRAM
-    score_results[current_program] = order_of_magnitude(real_score)
-    # empty starting entry needs deleted
-    del score_results[""]
+    with open(PERFORMANCE_RESULTS_FILE, 'r', newline='') as results_file:
+        reader = csv.DictReader(results_file)
+        current_program = ""
+        current_score = 0.0
+        for row in reader:
+            if row['program'][:-2] != current_program:
+                real_score = current_score / RUNS_PER_PROGRAM
+                score_results[current_program] = order_of_magnitude(real_score)
+                # print("REAL: " + str(real_score))
+                # print("ORDER: " + str(order_of_magnitude(real_score)))
+                current_program = row['program'][:-2]
+                current_score = 0.0
+            current_score += compute_score(row)
+        # final program needs added
+        real_score = current_score / RUNS_PER_PROGRAM
+        score_results[current_program] = order_of_magnitude(real_score)
+        # empty starting entry needs deleted
+        del score_results[""]
 
-# Get the smallest order of magnitude so the first category is 1
-minimum_order_of_magnitude = min(score_results.values())
+    # Get the smallest order of magnitude so the first category is 1
+    minimum_order_of_magnitude = min(score_results.values())
 
-with open(OUTPUT_FILE, 'w', newline='') as output_file:
-    writer = csv.DictWriter(output_file, fieldnames=['program', 'score'])
-    writer.writeheader()
-    for k, v in score_results.items():
-        writer.writerow({'program': k, 'score': SCORE_CLASS_MAPPING[(v + abs(minimum_order_of_magnitude))]})
+    with open(OUTPUT_FILE, 'w', newline='') as output_file:
+        writer = csv.DictWriter(output_file, fieldnames=['program', 'score'])
+        writer.writeheader()
+        for k, v in score_results.items():
+            writer.writerow({'program': k, 'score': SCORE_CLASS_MAPPING[(v + abs(minimum_order_of_magnitude))]})
 
         
