@@ -212,12 +212,12 @@ def format_perf_stat(raw: list[str]) -> dict:
     return results
 
 
-def format_cpudist(raw: list[str]) -> dict:
+def format_cpudist(raw) -> dict:
     """
     Formats raw string output from cpudist-bpfcc to be used for csv.DictWriter
 
     Args:
-        raw [str]: list of strings which are the lines of the captured shell output
+        raw (str): string which are the lines of the captured shell output
 
     Returns:
         dict: off-CPU times, key is length of time in microseconds, value is count of occurrence 
@@ -420,52 +420,52 @@ def collect_results(command: dict) -> dict:
     results.update(collect_cpudist(command))
     return results
 
-# main
-get_current_setting()
+if __name__ == '__main__':
+    get_current_setting()
 
-# Check if file contains the header row, otherwise write it
-try:    
-    with open(OUTPUT_FILENAME, 'r+', newline='') as csvfile:
-        print("reading existing file")
-        reader = csv.reader(csvfile, delimiter=',')
-        for row in reader:
-            try:
-                if row[0] != "program":
+    # Check if file contains the header row, otherwise write it
+    try:    
+        with open(OUTPUT_FILENAME, 'r+', newline='') as csvfile:
+            print("reading existing file")
+            reader = csv.reader(csvfile, delimiter=',')
+            for row in reader:
+                try:
+                    if row[0] != "program":
+                        print("writing header on existing file")
+                        writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+                        writer.writeheader()
+                    break
+                except(IndexError):
                     print("writing header on existing file")
                     writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
                     writer.writeheader()
-                break
-            except(IndexError):
+            if reader.line_num == 0:
                 print("writing header on existing file")
                 writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
                 writer.writeheader()
-        if reader.line_num == 0:
-            print("writing header on existing file")
+    except(FileNotFoundError):
+        with open(OUTPUT_FILENAME, 'w', newline='') as csvfile:
+            print("writing header in new file")
             writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
             writer.writeheader()
-except(FileNotFoundError):
-    with open(OUTPUT_FILENAME, 'w', newline='') as csvfile:
-        print("writing header in new file")
-        writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
-        writer.writeheader()
 
-# Check if program performance results have already been collected, otherwise run and append results
-for command in COMMANDS:
-    contains_program_result = False
-    with open(OUTPUT_FILENAME, newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
-        for row in reader:
-            if command['name'] in row[0]:
-                contains_program_result = True
-                break
+    # Check if program performance results have already been collected, otherwise run and append results
+    for command in COMMANDS:
+        contains_program_result = False
+        with open(OUTPUT_FILENAME, newline='') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            for row in reader:
+                if command['name'] in row[0]:
+                    contains_program_result = True
+                    break
 
-    if not contains_program_result:
-        with open(OUTPUT_FILENAME, 'a', newline='') as csvfile:
-            print(f"need to run {command['name']}")
-            # Multiple executions of each test program
-            for i in range(3):
-                results = collect_results(command)
-                results["program"] += f"_{i+1}"
-                writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
-                writer.writerow(results)
+        if not contains_program_result:
+            with open(OUTPUT_FILENAME, 'a', newline='') as csvfile:
+                print(f"need to run {command['name']}")
+                # Multiple executions of each test program
+                for i in range(3):
+                    results = collect_results(command)
+                    results["program"] += f"_{i+1}"
+                    writer = csv.DictWriter(csvfile, fieldnames=FIELDNAMES)
+                    writer.writerow(results)
                 
