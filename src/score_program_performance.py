@@ -23,10 +23,17 @@ SCORE_CLASS_MAPPING = {
     7: 3,
 }
 
-def order_of_magnitude(num):
+def order_of_magnitude(num: float) -> int:
+    """
+    Given a floating point number, get the order of magnitude
+    Args:
+        num (float): any number
+    Returns:
+        int
+    """
     if num == 0.0:
         return 0
-    return math.floor(math.log(num, 10))
+    return int(round(math.log(num, 10), 1))
 
 def compute_score(run: dict) -> float:
     """
